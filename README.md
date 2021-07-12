@@ -1,2 +1,2 @@
 # notebooktest
-# terminusdb-doc-project
+# terminusdb-project-x
