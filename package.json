@@ -4,6 +4,7 @@
   "description": "a project that using terminusdb document interface",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/terminusdb/terminusdb-project-x/issues"
   },
-  "homepage": "https://github.com/terminusdb/terminusdb-project-x#readme"
+  "homepage": "https://github.com/terminusdb/terminusdb-project-x#readme",
+  "dependencies": {
+    "fast-csv": "^4.3.6"
+  }
 }
