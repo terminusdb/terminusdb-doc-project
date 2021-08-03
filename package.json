@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/terminusdb/terminusdb-project-x#readme",
   "dependencies": {
+    "ejs": "^3.1.6",
     "fast-csv": "^4.3.6"
   }
 }

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home Page</title>
+
+    <style type="text/css" media="screen">
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            margin-inline: 40px;
+            background-color: #ededed;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        .header {
+            margin-inline: 110px;
+            margin-top: 80px;
+        }
+
+        .question {
+            margin-inline: 110px;
+            margin-top: 7rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .answer {
+            margin-inline: 120px;
+            margin-bottom: .5rem;
+        }
+
+        span {
+            cursor: pointer;
+            margin-left: 120px;
+            color: rgb(146, 146, 146);
+        }
+
+        .slide {
+            clear: both;
+            width: 100%;
+            height: 0px;
+            overflow: hidden;
+            text-align: center;
+            transition: height .4s ease;
+        }
+
+        nav {
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox {
+            position: absolute;
+            opacity: 0;
+            height: 0px;
+        }
+
+        .checkbox:checked+.slide {
+            height: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <h1 class="header">Results and visualizations of the queries on FreeCodeCamp New Coder Survey Dataset 2017 using
+        WOQL</h1>
+
+    <p class="question">1. What is the software job most of the new coders are interested in?</p>
+    <p class="answer">The software job most of the new coders are interested in is <b>
+            FullStack
+        </b> with <b>
+            5310
+        </b> votes. </p>
+    <nav>
+        <label for="touch1"><span>More Details</span></label>
+        <input class="checkbox" type="checkbox" id="touch1">
+        <div class="slide">
+            <div id="jobs_piechart" style="width: 1170px; height: 500px; margin: 10px;"></div>
+            <div id="jobs_barchart" style="width: 1170px; height: 650px; margin: 10px;"></div>
+        </div>
+    </nav>
+
+    <p class="question">2. What is the most popular resource used by new coders?</p>
+    <p class="answer">The most popular resource used by new coders is <b>
+            FCC
+        </b> used by <b>
+            13803
+        </b> coders. </p>
+    <nav>
+        <label for="touch2"><span>More Details</span></label>
+        <input class="checkbox" type="checkbox" id="touch2">
+        <div class="slide">
+            <div id="resources_piechart" style="width: 1170px; height: 500px; margin: 10px;"></div>
+            <div id="resources_barchart" style="width: 1170px; height: 650px; margin: 10px;"></div>
+        </div>
+    </nav>
+
+    <p class="question">3. What is the most popular youtube channel watched by new coders?</p>
+    <p class="answer">The most popular youtube channel watched by new coders is <b>
+            FCC
+        </b> with <b>
+            6036
+        </b> votes. </p>
+    <nav>
+        <label for="touch3"><span>More Details</span></label>
+        <input class="checkbox" type="checkbox" id="touch3">
+        <div class="slide">
+            <div id="channels_piechart" style="width: 1170px; height: 500px; margin: 10px;"></div>
+            <div id="channels_barchart" style="width: 1170px; height: 650px; margin: 10px;"></div>
+        </div>
+    </nav>
+
+    <p class="question">4. What is the most popular podcast among the new coders?</p>
+    <p class="answer">The most popular podcasts among new coders is <b>
+            CodeNewbie
+        </b> with <b>
+            1636
+        </b> votes. </p>
+    <nav>
+        <label for="touch4"><span>More Details</span></label>
+        <input class="checkbox" type="checkbox" id="touch4">
+        <div class="slide">
+            <div id="podcasts_piechart" style="width: 1170px; height: 500px; margin: 10px;"></div>
+            <div id="podcasts_barchart" style="width: 1170px; height: 650px; margin: 10px;"></div>
+        </div>
+    </nav>
+
+    <p class="question">5. What is the most popular coding event among the new coders?</p>
+    <p class="answer">The most popular coding event among the new coders is <b>
+            Meetup
+        </b> with <b>
+            2472
+        </b> votes. </p>
+    <nav>
+        <label for="touch5"><span>More Details</span></label>
+        <input class="checkbox" type="checkbox" id="touch5">
+        <div class="slide">
+            <div id="codeevents_piechart" style="width: 1170px; height: 500px; margin: 10px;"></div>
+            <div id="codeevents_barchart" style="width: 1170px; height: 650px; margin: 10px;"></div>
+        </div>
+    </nav>
+
+    <p class="question">6. How many coders in the range between 20 to 30 age are unemployed?</p>
+    <p class="answer"> <b>
+            2145
+        </b> coders in the range between 20 to 30 age are unemployed.</p>
+    <!-- <nav>
+        <label for="touch6"><span>More Details</span></label>
+        <input class="checkbox" type="checkbox" id="touch6">
+        <div class="slide">
+            <div id="codeevents_piechart" style="width: 1170px; height: 500px; margin: 10px;"></div>
+            <div id="codeevents_barchart" style="width: 1170px; height: 650px; margin: 10px;"></div>
+        </div>
+    </nav> -->
+
+    <p class="question">7. Which country is having highest amount of under employed coders?</p>
+    <p class="answer">The country having highest amount of under employed coders is <b>
+            United States of America
+        </b> with <b>
+            1719
+        </b> votes. </p>
+    <nav>
+        <label for="touch7"><span>More Details</span></label>
+        <input class="checkbox" type="checkbox" id="touch7">
+        <div class="slide">
+            <div id="underemployed_piechart" style="width: 1170px; height: 500px; margin: 10px;"></div>
+            <div id="underemployed_barchart" style="width: 1170px; height: 1650px; margin: 10px;"></div>
+        </div>
+    </nav>
+
+    <p class="question">8. How many coders who majored in computer related field but are working in different employment
+        field?</p>
+    <p class="answer"><b>
+        145
+    </b>  coders who majored in computer related field but are working in different employment
+        field </p>
+    <!-- <nav>
+        <label for="touch8"><span>More Details</span></label>
+        <input class="checkbox" type="checkbox" id="touch8">
+        <div class="slide">
+            <div id="codeevents_piechart" style="width: 1170px; height: 500px; margin: 10px;"></div>
+            <div id="codeevents_barchart" style="width: 1170px; height: 650px; margin: 10px;"></div>
+        </div>
+    </nav> -->
+
+</body>
+
+<!-- Most popular Jobs Chart -->
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart", "bar"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        const data = google.visualization.arrayToDataTable(JSON.parse('[["Jobs","Count of Coders"],["QAEngr",1415],["ProjMngr",1782],["DevOps",1915],["DataEngr",2294],["InfoSec",2342],["UX",2527],["GameDev",2708],["DataSci",2721],["Mobile",3388],["BackEnd",3869],["FrontEnd",4632],["FullStack",5310]]'));
+
+        let options = {
+            title: 'Most Popular Jobs',
+        };
+
+        const pieChart = new google.visualization.PieChart(document.getElementById('jobs_piechart'));
+        pieChart.draw(data, options);
+
+        options = {
+            title: 'Count of Coders',
+            // chartArea: {width: '0%'},
+            hAxis: {
+                title: 'Most Popular Jobs',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Job Title'
+            }
+        };
+
+        const barChart = new google.visualization.BarChart(document.getElementById('jobs_barchart'));
+        barChart.draw(data, options);
+
+    }
+</script>
+
+<!-- Most popular Resources Chart -->
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart", "bar"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        const data = google.visualization.arrayToDataTable(JSON.parse('[["Resources","Count of Coders"],["Other",1],["Skillcrush",452],["OdinProj",976],["Egghead",1341],["CodeWars",1848],["HackerRank",2049],["Treehouse",2260],["PluralSight",2392],["Lynda",2558],["EdX",3243],["KA",3800],["Udacity",3837],["Coursera",4402],["CSS",4671],["Udemy",5120],["MDN",6417],["Codecademy",9390],["W3S",9765],["SO",11207],["FCC",13803]]'));
+
+        let options = {
+            title: 'Most Popular Resources',
+        };
+
+        const pieChart = new google.visualization.PieChart(document.getElementById('resources_piechart'));
+        pieChart.draw(data, options);
+
+        options = {
+            title: 'Count of Coders',
+            // chartArea: {width: '0%'},
+            hAxis: {
+                title: 'Most Popular Resources',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Resource'
+            }
+        };
+
+        const barChart = new google.visualization.BarChart(document.getElementById('resources_barchart'));
+        barChart.draw(data, options);
+
+    }
+</script>
+
+<!-- Most popular Channels Chart -->
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart", "bar"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        const data = google.visualization.arrayToDataTable(JSON.parse('[["Channels","Count of Coders"],["Simplilearn",201],["MozillaHacks",622],["CodeCourse",956],["CodingTrain",976],["EngineeredTruth",993],["FunFunFunction",1261],["LevelUpTuts",1396],["CodingTut360",1397],["Computerphile",1453],["DerekBanas",1847],["DevTips",2619],["LearnCode",2662],["TheNewBoston",2960],["MIT",3327],["GoogleDev",3539],["FCC",6036]]'));
+
+        let options = {
+            title: 'Most Popular Youtube Channels',
+        };
+
+        const pieChart = new google.visualization.PieChart(document.getElementById('channels_piechart'));
+        pieChart.draw(data, options);
+
+        options = {
+            title: 'Count of Coders',
+            // chartArea: {width: '0%'},
+            hAxis: {
+                title: 'Most Popular Youtube Channels',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Channels'
+            }
+        };
+
+        const barChart = new google.visualization.BarChart(document.getElementById('channels_barchart'));
+        barChart.draw(data, options);
+
+    }
+</script>
+
+<!-- Most popular Podcasts Chart -->
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart", "bar"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        const data = google.visualization.arrayToDataTable(JSON.parse('[["Podcasts","Count of Coders"],["GiantRobots",187],["TheWebAhead",311],["ShopTalk",318],["DotNET",327],["RubyRogues",333],["ProgThrowdown",345],["ChangeLog",403],["SERadio",408],["TalkPython",655],["JSAir",726],["DevTea",728],["CodePen",773],["SEDaily",790],["None",1061],["JSJabber",1123],["CodeNewbie",1636]]'));
+
+        let options = {
+            title: 'Most Popular Podcasts',
+        };
+
+        const pieChart = new google.visualization.PieChart(document.getElementById('podcasts_piechart'));
+        pieChart.draw(data, options);
+
+        options = {
+            title: 'Count of Coders',
+            // chartArea: {width: '0%'},
+            hAxis: {
+                title: 'Most Popular Podcasts',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Podcasts'
+            }
+        };
+
+        const barChart = new google.visualization.BarChart(document.getElementById('podcasts_barchart'));
+        barChart.draw(data, options);
+
+    }
+</script>
+
+<!-- Most popular Code Events Chart -->
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart", "bar"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        const data = google.visualization.arrayToDataTable(JSON.parse('[["Code Events","Count of Coders"],["RailsGirls",132],["RailsBridge",133],["DjangoGirls",165],["GameJam",290],["GirlDev",297],["NodeSchool",446],["WomenCode",481],["StartUpWknd",544],["WkdBootcamps",547],["None",1076],["Conferences",1609],["FCC",1708],["Workshops",1753],["Hackathons",1977],["Meetup",2472]]'));
+
+        let options = {
+            title: 'Most Popular Code Events',
+        };
+
+        const pieChart = new google.visualization.PieChart(document.getElementById('codeevents_piechart'));
+        pieChart.draw(data, options);
+
+        options = {
+            title: 'Count of Coders',
+            // chartArea: {width: '0%'},
+            hAxis: {
+                title: 'Most Popular Code Events',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Code Events'
+            }
+        };
+
+        const barChart = new google.visualization.BarChart(document.getElementById('codeevents_barchart'));
+        barChart.draw(data, options);
+
+    }
+</script>
+
+<!-- Most popular UnderEmployed country Chart -->
+<script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart", "bar"] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+        const data = google.visualization.arrayToDataTable(JSON.parse('[["Country","Count of UnderEmployed Coders"],["Afghanistan",1],["Benin",1],["Bolivia",1],["Burundi",1],["Cayman Islands",1],["Cyprus",1],["Dominica",1],["Ethiopia",1],["Gabon",1],["Guatemala",1],["Haiti",1],["Hawaii",1],["Honduras",1],["Iraq",1],["Kuwait",1],["Lebanon",1],["Madagascar",1],["Mongolia",1],["Mozambique",1],["Myanmar",1],["Nambia",1],["Netherland Antilles",1],["Nicaragua",1],["Palestine",1],["Senegal",1],["Somalia",1],["Tanzania",1],["Tunisia",1],["Turkmenistan",1],["Uzbekistan",1],["Vanuatu",1],["Angola",2],["Azerbaijan",2],["Cameroon",2],["Cote D Ivoire",2],["Ecuador",2],["El Salvador",2],["Gambia",2],["Georgia",2],["Guam",2],["Papua New Guinea",2],["Peru",2],["Qatar",2],["Republic of Montenegro",2],["Swaziland",2],["Uganda",2],["Algeria",3],["Costa Rica",3],["Cuba",3],["Iran",3],["Maldives",3],["Malta",3],["Panama",3],["Paraguay",3],["Sri Lanka",3],["Trinidad & Tobago",3],["Zimbabwe",3],["Austria",4],["Estonia",4],["Macedonia",4],["Moldova",4],["Slovenia",4],["Cambodia",5],["Hong Kong",5],["Latvia",5],["Morocco",5],["Puerto Rico",5],["Republic of Serbia",5],["Saudi Arabia",5],["Taiwan",5],["Albania",6],["Dominican Republic",7],["Ghana",7],["Jamaica",7],["Nepal",7],["Slovakia",7],["Thailand",7],["United Arab Emirates",7],["Belgium",8],["Bosnia & Herzegovina",8],["Uruguay",8],["Virgin Islands (USA)",8],["Kazakhstan",9],["Belarus",10],["Chile",10],["Finland",10],["Korea South",10],["Switzerland",10],["Bangladesh",11],["Denmark",12],["Norway",12],["Sweden",12],["Croatia",13],["Bulgaria",14],["Singapore",14],["Lithuania",15],["Malaysia",15],["Portugal",16],["Great Britain",17],["Israel",17],["Indonesia",18],["Venezuela",18],["Vietnam",18],["Japan",19],["Colombia",20],["Hungary",20],["New Zealand",20],["China",22],["Egypt",22],["Ireland",22],["Kenya",22],["Pakistan",22],["Czech Republic",23],["Philippines",24],["Netherlands (Holland, Europe)",28],["Serbia",28],["Turkey",31],["Italy",34],["Romania",34],["Greece",35],["NA",35],["Spain",37],["Argentina",38],["France",38],["South Africa",43],["Mexico",45],["Russia",53],["Ukraine",58],["Poland",59],["Germany",62],["Nigeria",65],["Australia",66],["Brazil",82],["Canada",148],["United Kingdom",239],["India",274],["United States of America",1719]]'));
+
+        let options = {
+            title: 'Most Popular Code Events',
+        };
+
+        const pieChart = new google.visualization.PieChart(document.getElementById('underemployed_piechart'));
+        pieChart.draw(data, options);
+
+        options = {
+            title: 'Count of Coders',
+            // chartArea: {width: '0%'},
+            hAxis: {
+                title: 'Most Popular Code Events',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Code Events'
+            }
+        };
+
+        const barChart = new google.visualization.BarChart(document.getElementById('underemployed_barchart'));
+        barChart.draw(data, options);
+
+    }
+</script>
+
+</html>
