@@ -12,6 +12,7 @@ const client = new WOQLClient(server, {
 const connectDB = async () => {
   try {
     await client.connect();
+    console.log("Connected to database...")
     return client;
   } catch (error) {
     console.error(error);
