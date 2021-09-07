@@ -18,8 +18,13 @@ const runScript = async () => {
     client.db(CoderDB);
 
     // await createDocuments.createSchema(client);
+    // check if the list of documents have been inserted
+    // getDocument by id ....
+    // upateDocument (change the documentation)
 
     // await createDocuments.insertDocumentInstances(client);
+    // getDocument dy id
+    // queryDocument template pattern 
 
     let resultMostPopularJobs = await queries.getMostPopularJobs(client);
     resultMostPopularJobs = resultMostPopularJobs.map((jobs) => {
