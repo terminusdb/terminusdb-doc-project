@@ -1,65 +1,140 @@
-const {WOQLClient} = require("@terminusdb/terminusdb-client");
+const ejs = require("ejs");
+const fs = require("fs");
+const connectDB = require("./src/db");
+const queries = require("./src/queries");
+const createDocuments = require("./src/createDocuments");
 
-const json_schema =[
-    {
-       "@base": "terminusdb:///data/",
-       "@schema": "terminusdb:///schema#",
-       "@type": "@context"
-   },
-    {
-       "@type":"Class",
-       "@id":"Station",
-       "@base":"Station_",
-       "@key":{
-          "@type":"Lexical",
-          "@fields":[
-             "station_number"
-          ]
-       },
-       "station_number":"xsd:decimal",
-       "address":"xsd:string"
-    },
-    {
-       "@type":"Class",
-       "@id":"Bike",
-       "@base":"Bike_",
-       "@key":{
-          "@type":"Lexical",
-          "@fields":[
-             "bike_number"
-          ]
-       },
-       "bike_number":"xsd:string"
-    },
-    {
-       "@type":"Class",
-       "@id":"Journey",
-       "@base":"Journey_",
-       "@key":{
-          "@type":"Lexical",
-          "@fields":[
-             "bike",
-             "start_station",
-             "end_station",
-             "start_time",
-             "end_time"
-          ]
-       },
-       "bike":"Bike",
-       "start_station":"Station",
-       "end_station":"Station",
-       "start_time":"xsd:dateTime",
-       "end_time":"xsd:dateTime"
-    }
- ]
+const runScript = async () => {
+  try {
+    // connect to db
+    const client = await connectDB();
+    const CoderDB = "NewCoder_test017";
 
-const server="http://localhost:6363"
+    // await client.createDatabase(CoderDB, {
+    //   label: "New Coder Survey Database",
+    //   comment: "Created new coder survey database",
+    // });
 
-const client = new WOQLClient(server,{user:'admin',organization:'admin',key:"root"})
+    client.db(CoderDB);
 
-const bikeDB = "Bike_test001"
+    // await createDocuments.createSchema(client);
+    // check if the list of documents have been inserted
+    // getDocument by id ....
+    // upateDocument (change the documentation)
 
-client.createDatabase(bikeDB, {label: "My Bike", comment: "Create bike"})
-//client.deleteDatabase(bikeDB)
+    // await createDocuments.insertDocumentInstances(client);
+    // getDocument dy id
+    // queryDocument template pattern 
 
-client.addDocument(json_schema,{graph_type:"schema"})
+    let resultMostPopularJobs = await queries.getMostPopularJobs(client);
+    resultMostPopularJobs = resultMostPopularJobs.map((jobs) => {
+      return [jobs.JobInterest.slice(23), jobs.JobInterestGroupCount["@value"]];
+    });
+
+    let resultMostPopularResource = await queries.getMostPopularResource(
+      client
+    );
+    resultMostPopularResource = resultMostPopularResource.map((resource) => {
+      return [
+        resource.UsesResource.slice(25),
+        resource.UsesResource_group.length,
+      ];
+    });
+
+    let resultMostPopularChannel = await queries.getMostPopularChannel(client);
+    resultMostPopularChannel = resultMostPopularChannel.map((Channel) => {
+      return [Channel.Channels.slice(23), Channel.Channels_group.length];
+    });
+
+    let resultMostPopularPodcast = await queries.getMostPopularPodcast(client);
+    resultMostPopularPodcast = resultMostPopularPodcast.map((Podcast) => {
+      return [
+        Podcast.ListensToPodcast.slice(23),
+        Podcast.ListensToPodcast_group.length,
+      ];
+    });
+
+    let resultMostPopularCodeEvent = await queries.getMostPopularCodeEvent(
+      client
+    );
+    resultMostPopularCodeEvent = resultMostPopularCodeEvent.map((CodeEvent) => {
+      return [
+        CodeEvent.EventsAttended.slice(23),
+        CodeEvent.EventsAttended_group.length,
+      ];
+    });
+
+    let resultCodersBetween2030Unemployed =
+      await queries.getCodersBetween2030Unemployed(client);
+
+    let resultMostUnderEmployedCountry =
+      await queries.getMostUnderEmployedCountry(client);
+    resultMostUnderEmployedCountry = resultMostUnderEmployedCountry.map(
+      (Country) => {
+        if (
+          Country.CountryLive.slice(8).split("%20").join(" ") ===
+          "Cote D'Ivoire"
+        ) {
+          return ["Cote D Ivoire", Country.CountryLiveGroupCount["@value"]];
+        }
+        return [
+          Country.CountryLive.slice(8).split("%20").join(" ").toString(),
+          Country.CountryLiveGroupCount["@value"],
+        ];
+      }
+    );
+
+    let resultCountOfCodersNotInComputerField =
+      await queries.getCountOfCodersNotInComputerField(client);
+    await queries.getAverageIncomeOfCountries(client);
+
+    console.log("Execution of queries successful, rendering report file..");
+
+    // Create a HTML report to visualize results
+    ejs.renderFile(
+      "./resultTemplate.ejs",
+      {
+        data: {
+          MostPopularJobs: [
+            ["Jobs", "Count of Coders"],
+            ...resultMostPopularJobs,
+          ],
+          MostPopularResources: [
+            ["Resources", "Count of Coders"],
+            ...resultMostPopularResource,
+          ],
+          MostPopularChannel: [
+            ["Channels", "Count of Coders"],
+            ...resultMostPopularChannel,
+          ],
+          MostPopularPodcast: [
+            ["Podcasts", "Count of Coders"],
+            ...resultMostPopularPodcast,
+          ],
+          MostPopularCodeEvent: [
+            ["Code Events", "Count of Coders"],
+            ...resultMostPopularCodeEvent,
+          ],
+          CodersBetween2030Unemployed:
+            resultCodersBetween2030Unemployed[0].CountOfUnemployedCoders[
+              "@value"
+            ],
+          MostUnderEmployedCountry: [
+            ["Country", "Count of UnderEmployed Coders"],
+            ...resultMostUnderEmployedCountry,
+          ],
+          CountOfCodersNotInComputerField:
+            resultCountOfCodersNotInComputerField[0].CountOfCoders["@value"],
+        },
+      },
+      function (err, str) {
+        // str => Rendered HTML string
+        fs.writeFileSync("./result.html", str, "utf8");
+      }
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+runScript();
